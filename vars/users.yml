@@ -1,0 +1,12 @@
+users:
+  - name: naoto
+    shell: /bin/bash
+    pubkey: "ssh_keys/naoto/naoto.pub"
+    git_ssh_key: "ssh_keys/naoto/naoto_git_id_ed25519"
+    git_identity_name: "git_id_ed25519"
+    use_vimrc: true
+
+  - name: kensuke
+    shell: /bin/bash
+    pubkey: "ssh_keys/kensuke/kensuke.pub"
+    use_vimrc: true

@@ -1,0 +1,71 @@
+[[plugins]]
+repo = "Shougo/unite.vim"
+
+
+[[plugins]]
+repo = "vim-syntastic/syntastic"
+hook_add = '''
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+
+  " python
+  let g:syntastic_python_checkers = ["flake8"]
+  let g:syntastic_python_flake8_args = '--ignore="E501"'
+  let g:flake8_cmd="~/.pyenv/shims/flake8"
+  let g:flake8_ignore = 'E501'
+
+  " golang
+  let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+  let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+  let g:go_def_mapping_enabled = 0
+  let g:go_fmt_autosave = 1
+  let g:go_highlight_types = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_methods = 1
+
+  " javascript
+  let g:syntastic_javascript_eslint_exec = '~/.nodenv/shims/eslint'
+  let g:syntastic_javascript_checkers = ['eslint']
+  let g:syntastic_mode_map = {
+        \ 'mode': 'active',
+        \ 'active_filetypes': ['javascript'],
+        \ 'passive_filetypes': []
+        \ }
+'''
+
+
+[[plugins]]
+repo = "mitsuhiko/vim-jinja"
+
+
+#[[plugins]]
+#repo = "neoclide/coc.nvim"
+#rev  = "refs/tags/v0.0.81"
+#build = "coc#util#install"
+#hook_add = '''
+#  let g:coc_disable_startup_warning = 1
+#  " terraform
+#  set nobackup
+#  set nowritebackup
+#  set updatetime=300
+'''
+
+
+[[plugins]]
+repo = "Yggdroot/indentLine"
+hook_add = '''
+  let g:indentLine_char = '|'
+'''
+
+[[plugins]]
+repo = "pangloss/vim-javascript"
+
+[[plugins]]
+repo = "leafgarland/typescript-vim"

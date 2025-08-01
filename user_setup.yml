@@ -1,0 +1,49 @@
+- name: Create user "{{ user.name }}"
+  user:
+    name: "{{ user.name }}"
+    shell: "{{ user.shell | default('/bin/bash') }}"
+    state: present
+    create_home: yes
+
+- name: Ensure .ssh directory
+  file:
+    path: "/home/{{ user.name }}/.ssh"
+    state: directory
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: '0700'
+
+- name: Install authorized_keys
+  copy:
+    src: "files/{{ user.pubkey }}"
+    dest: "/home/{{ user.name }}/.ssh/authorized_keys"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: '0600'
+
+- name: Install GitHub private key
+  copy:
+    src: "files/{{ user.git_ssh_key }}"
+    dest: "/home/{{ user.name }}/.ssh/{{ user.git_identity_name }}"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: '0600'
+  when: user.git_ssh_key is defined
+
+- name: Install GitHub ssh config
+  template:
+    src: "templates/ssh_config.j2"
+    dest: "/home/{{ user.name }}/.ssh/config"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: '0644'
+  when: user.git_ssh_key is defined
+
+- name: Copy .vimrc
+  copy:
+    src: "files/{{ user.vimrc_file | default('vimrcs/default.vimrc') }}"
+    dest: "/home/{{ user.name }}/.vimrc"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: '0644'
+  when: user.use_vimrc | default(false)

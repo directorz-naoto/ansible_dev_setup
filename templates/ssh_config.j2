@@ -1,0 +1,6 @@
+{% if user.git_identity_name is defined %}
+Host github.com
+    User git
+    IdentityFile ~/.ssh/{{ user.git_identity_name }}
+    IdentitiesOnly yes
+{% endif %}

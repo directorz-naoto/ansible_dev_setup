@@ -1,0 +1,12 @@
+- name: Create multiple users
+  hosts: localhost
+  become: yes
+  vars_files:
+    - vars/users.yml
+
+  tasks:
+    - name: Include per-user task
+      include_tasks: user_setup.yml
+      loop: "{{ users }}"
+      loop_control:
+        loop_var: user
