@@ -47,3 +47,12 @@
     group: "{{ user.name }}"
     mode: '0644'
   when: user.use_vimrc | default(false)
+
+- name: Allow sudo for user (sudoers.d)
+  copy:
+    dest: "/etc/sudoers.d/{{ user.name }}"
+    content: "{{ user.name }} ALL=(ALL) NOPASSWD:ALL"
+    owner: root
+    group: root
+    mode: '0440'
+  when: user.sudo | default(false)
