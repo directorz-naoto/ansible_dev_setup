@@ -9,4 +9,6 @@ users:
   - name: kensuke
     shell: /bin/bash
     pubkey: "ssh_keys/kensuke/kensuke.pub"
+    git_ssh_key: "ssh_keys/kensuke/id_ed25519_no_prod-kensuke-github"
+    git_identity_name: "git_id_ed25519"
     use_vimrc: true
